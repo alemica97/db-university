@@ -18,7 +18,7 @@ WHERE `cfu` > 10;
 
 SELECT * 
 FROM `students`
-WHERE YEAR(`date_of_birth`) = YEAR(CURRENT_DATE) - 31;
+WHERE YEAR(`date_of_birth`) <= YEAR(CURRENT_DATE) - 31;
 
 -----------------------------------------------------------------------------------
 
@@ -57,6 +57,6 @@ FROM `departments`;
 
 8. Quanti sono gli insegnati che non hanno un numero di telefono?
 
-SELECT * 
+SELECT COUNT(*)
 FROM `teachers`
 WHERE `phone` IS NULL;
