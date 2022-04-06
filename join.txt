@@ -75,12 +75,11 @@ ORDER BY `teachers`.`id` ASC;
 
 7. BONUS: Selezionare per ogni studente quanti tentativi d'esame ha sostenuto per superare ciascuno dei suoi esami
 
-SELECT `students`.`id`, `students`.`name`, `students`.`surname`, `exams`.`course_id`,`exam_student`.`exam_id`, `exam_student`.`vote`
-FROM `students`
+SELECT `exams`.`course_id`, `students`.`id` AS `studente_id`, COUNT(`exams`.`course_id`) AS `numero_volte_sostenuto`, MAX(`exam_student`.`vote`) AS `voto_massimo_prove`
+FROM `exams`
 INNER JOIN `exam_student`
-ON `exam_student`.`student_id` = `students`.`id`
-INNER JOIN `exams`
-ON `exams`.`id` = `exam_student`.`exam_id`  
-ORDER BY `students`.`id`  ASC
-GROUP BY `students`.`id`
-HAVING MAX(`exam_student`.`vote`) >= 18
+ON `exam_student`.`exam_id` = `exams`.`id`
+INNER JOIN `students`
+ON `students`.`id` = `exam_student`.`student_id`
+GROUP BY `exams`.`course_id`,`students`.`id`
+ORDER BY `students`.`id`,`exams`.`course_id` ASC
