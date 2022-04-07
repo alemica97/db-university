@@ -49,7 +49,7 @@ FROM `degrees`
 INNER JOIN `courses`
 ON `courses`.`degree_id` = `degrees`.`id`
 INNER JOIN `course_teacher`
-ON `course_teacher`.`course_id`
+ON `course_teacher`.`course_id` = `courses`.`id`
 INNER JOIN `teachers`
 ON `teachers`.`id` = `course_teacher`.`teacher_id`;
 
